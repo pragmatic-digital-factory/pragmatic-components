@@ -6,13 +6,7 @@
   "trailingComma": "es5",
   "overrides": [
     {
-      "files": "./**/*.js",
-      "options": {
-        "parser": "babylon"
-      }
-    },
-    {
-      "files": "src/**/*.{scss,css}",
+      "files": "src/**/*.{less,css}",
       "options": {
         "parser": "postcss",
         "semi": true
