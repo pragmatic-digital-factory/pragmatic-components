@@ -1,3 +1,4 @@
+import React from 'react';
 import { addDecorator, configure } from '@storybook/react';
 import { addLocaleData } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
@@ -22,6 +23,12 @@ const messages = {
   en: enMessages,
   fr: frMessages,
 };
+
+/* Wrapper for semantic ui */
+const Wrapper = storyFn => {
+  return <form className={'ui form'}>{storyFn()}</form>;
+};
+addDecorator(Wrapper);
 
 addDecorator(withIntl);
 addDecorator((story, context) => withInfo('Documentation')(story)(context));

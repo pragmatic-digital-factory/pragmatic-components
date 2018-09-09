@@ -79,7 +79,7 @@ export default class FormAmount extends React.Component {
       maxLength,
       name,
       label,
-      unit,
+      currency,
       placeholder,
       readOnly,
       required,
@@ -104,7 +104,7 @@ export default class FormAmount extends React.Component {
           value,
         })}
         {errors && errors.length > 0 && <FormErrors errors={errors} />}
-        {unit && <span className="unit">{unit}</span>}
+        {currency && <span className="currency">{currency}</span>}
       </div>
     );
   }
@@ -112,7 +112,7 @@ export default class FormAmount extends React.Component {
 
 FormAmount.defaultProps = {
   name: 'amountName',
-  unit: '€',
+  currency: '€',
 };
 
 FormAmount.PropTypes = {
@@ -131,7 +131,7 @@ FormAmount.PropTypes = {
   placeholder: PropTypes.string,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
-  unit: PropTypes.string,
+  currency: PropTypes.string,
 };
 
 export class CheckboxGroup extends React.Component {

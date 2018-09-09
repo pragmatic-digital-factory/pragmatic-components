@@ -3,12 +3,8 @@ import { storiesOf, addDecorator } from '@storybook/react';
 
 import FormInput from '../src/components/Form/FormInput';
 
-const Wrapper = storyFn => {
-  return <form className={'ui form'}>{storyFn()}</form>;
-};
-
 let toggled = false;
-addDecorator(Wrapper);
+
 export default storiesOf('FormInput', module)
   .add('default', () => <FormInput className={'field'} />)
   .add('autocomplete', () => (

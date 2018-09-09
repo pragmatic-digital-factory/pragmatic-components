@@ -116,7 +116,7 @@ FormSelect.propTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
-  options: PropTypes.object,
+  options: PropTypes.object.isRequired,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
 };
