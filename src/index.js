@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import './index.css';
 
@@ -8,7 +9,9 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <IntlProvider locale="en">
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </IntlProvider>,
   document.getElementById('root')
 );

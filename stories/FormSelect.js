@@ -1,93 +1,28 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-
+import CountryList from '../src/enum/CountryList';
 import FormSelect from '../src/components/Form/FormSelect';
 
 export default storiesOf('FormSelect', module)
-  .add('default', () => (
-    <FormSelect
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
-    />
-  ))
+  .add('default', () => <FormSelect options={CountryList} />)
   .add('autoComplete', () => (
     <div>
-      <FormSelect
-        autoComplete="on"
-        options={{
-          option1: 'Option 1',
-          option2: 'Option 2',
-          option3: 'Option 3',
-        }}
-      />
+      <FormSelect autoComplete="on" options={CountryList} />
       <button onClick={() => history.go(0)}>Reload the page</button>
     </div>
   ))
-  .add('className', () => (
-    <FormSelect
-      className="field"
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
-    />
-  ))
-  .add('disabled', () => (
-    <FormSelect
-      disabled
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
-    />
-  ))
-  .add('errors', () => (
-    <FormSelect
-      errors={['Error on the field']}
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
-      className="error field"
-    />
-  ))
-  .add('label', () => (
-    <FormSelect
-      label="Label"
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
-    />
-  ))
-  .add('name', () => (
-    <FormSelect
-      name="nameOfSelect"
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
-    />
-  ))
+  .add('className', () => <FormSelect className="field" options={CountryList} />)
+  .add('disabled', () => <FormSelect disabled options={CountryList} />)
+  .add('errors', () => <FormSelect errors={['Error on the field']} options={CountryList} className="error field" />)
+  .add('label', () => <FormSelect label="Label" options={CountryList} />)
+  .add('name', () => <FormSelect name="nameOfSelect" options={CountryList} />)
   .add('onBlur', () => {
     return (
       <div>
         <FormSelect
           placeholder="common.select"
           onBlur={e => alert('You have left the select field')}
-          options={{
-            option1: 'Option 1',
-            option2: 'Option 2',
-            option3: 'Option 3',
-          }}
+          options={CountryList}
         />
         <FormSelect />
       </div>
@@ -95,11 +30,7 @@ export default storiesOf('FormSelect', module)
   })
   .add('onChange', () => (
     <FormSelect
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
+      options={CountryList}
       onChange={e => {
         alert(`You are selecting the option : ${e.target.value}`);
       }}
@@ -107,11 +38,7 @@ export default storiesOf('FormSelect', module)
   ))
   .add('onFocus', () => (
     <FormSelect
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
+      options={CountryList}
       onFocus={e => {
         alert('You focused the select field');
         e.target.blur();
@@ -119,61 +46,53 @@ export default storiesOf('FormSelect', module)
     />
   ))
   .add('placeholder', () => <FormSelect placeholder="common.select" />, { info: `placeholder set.` })
-  .add('options', `Options set`, () => (
-    <FormSelect
-      options={{
-        option1: 'Option 1',
-        option2: 'Option 2',
-        option3: 'Option 3',
-      }}
-    />
-  ))
+  .add('options', `Options set`, () => <FormSelect options={CountryList} />)
   .add('options - with groups', () => (
     <FormSelect
-      options={{
-        group1: {
+      options={[
+        {
           label: 'Groupe 1',
-          options: {
-            option1: 'Option 1',
-            option2: 'Option 2',
-            option3: 'Option 3',
-          },
+          options: [
+            { label: 'Option 1', value: 'option1' },
+            { label: 'Option 2', value: 'option2' },
+            { label: 'Option 3', value: 'option3' },
+          ],
           disabled: false,
         },
-        group2: {
+        {
           label: 'Groupe 2',
-          options: {
-            option1: 'Option 1',
-            option2: 'Option 2',
-            option3: 'Option 3',
-          },
+          options: [
+            { label: 'Option 1', value: 'option1' },
+            { label: 'Option 2', value: 'option2' },
+            { label: 'Option 3', value: 'option3' },
+          ],
           disabled: false,
         },
-      }}
+      ]}
     />
   ))
   .add('options - with disabled groups', () => (
     <FormSelect
-      options={{
-        group1: {
+      options={[
+        {
           label: 'Groupe 1',
-          options: {
-            option1: 'Option 1',
-            option2: 'Option 2',
-            option3: 'Option 3',
-          },
+          options: [
+            { label: 'Option 1', value: 'option1' },
+            { label: 'Option 2', value: 'option2' },
+            { label: 'Option 3', value: 'option3' },
+          ],
           disabled: false,
         },
-        group2: {
+        {
           label: 'Groupe 2',
-          options: {
-            option1: 'Option 1',
-            option2: 'Option 2',
-            option3: 'Option 3',
-          },
+          options: [
+            { label: 'Option 1', value: 'option1' },
+            { label: 'Option 2', value: 'option2' },
+            { label: 'Option 3', value: 'option3' },
+          ],
           disabled: true,
         },
-      }}
+      ]}
     />
   ))
   .add('required', () => <FormSelect label="label" required />, { info: `required set.` })

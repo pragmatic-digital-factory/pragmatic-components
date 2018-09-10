@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Page from '../hoc/page';
 
-export default props => {
+const HomePage = props => {
   return (
     <div className="ui three column grid">
       <div className="stretched row">
@@ -12,7 +14,7 @@ export default props => {
                   <i aria-hidden="true" className="wpforms icon huge blue circular" />
                 </div>
                 <div className="content">
-                  <div className="header">Upload :</div>
+                  <div className="header">Formulaires :</div>
                   <div className="meta">
                     <span className="price">En cours de dév</span>
                   </div>
@@ -21,7 +23,9 @@ export default props => {
                       Des composants basiques de formulaires ainsi qu'un module agnostique permettant de contrôler et de
                       valider un formulaire. Ce module peut égalment s'interfacer avec un state de type redux ou mobx...
                     </p>
-                    <button className="ui primary button">Découvrir</button>
+                    <Link to={`/forms`}>
+                      <button className="ui primary button">Découvrir</button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -85,3 +89,5 @@ export default props => {
     </div>
   );
 };
+
+export default Page('Draft demo in a real context v/s Storybook')(HomePage);

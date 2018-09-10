@@ -5,10 +5,6 @@ import Label from './Label';
 import FormErrors from './FormErrors';
 
 export default class FormInput extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       autoComplete,
@@ -88,5 +84,5 @@ FormInput.propTypes = {
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
   step: PropTypes.string,
-  type: PropTypes.oneOf(['checkbox', 'email', 'number', 'tel', 'text', 'radio', 'range']),
+  type: PropTypes.oneOf(['checkbox', 'email', 'hidden', 'number', 'tel', 'text', 'radio', 'range']),
 };

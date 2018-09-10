@@ -5,10 +5,6 @@ import Label from './Label';
 import FormErrors from './FormErrors';
 
 export default class FormSelect extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderPlaceholder() {
     const { placeholder } = this.props;
     if (placeholder) {
@@ -20,24 +16,8 @@ export default class FormSelect extends React.Component {
     }
   }
 
-  generateOptions(options) {
-    return Object.keys(options).map(option => ({
-      label: options[option],
-      value: option,
-    }));
-  }
-
-  generateGroups(groups) {
-    return Object.keys(groups).map(group => ({
-      label: groups[group].label,
-      options: groups[group].options,
-      disabled: groups[group].disabled,
-    }));
-  }
-
   renderOptions(options) {
-    const myoptions = this.generateOptions(options);
-    return myoptions.map(({ label, value }) => (
+    return options.map(({ label, value }) => (
       <option key={value} value={value}>
         {label}
       </option>
@@ -47,18 +27,15 @@ export default class FormSelect extends React.Component {
   renderGroups(groups) {
     let result = [];
     result.push(this.renderPlaceholder());
-
-    groups &&
-      typeof groups[Object.keys(groups)[0]] === 'object' &&
-      this.generateGroups(groups).forEach(({ label, options, disabled }) =>
-        result.push(
-          <optgroup key={label} disabled={disabled} label={label}>
-            {this.renderOptions(options)}
-          </optgroup>
+    Object.keys(groups[0]).length > 2
+      ? groups.forEach(({ label, options, disabled }) =>
+          result.push(
+            <optgroup key={label} disabled={disabled} label={label}>
+              {this.renderOptions(options)}
+            </optgroup>
+          )
         )
-      );
-
-    groups && typeof groups[Object.keys(groups)[0]] === 'string' && result.push(this.renderOptions(groups));
+      : result.push(this.renderOptions(groups));
 
     return result;
   }
@@ -116,7 +93,7 @@ FormSelect.propTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
-  options: PropTypes.object.isRequired,
+  options: PropTypes.array.isRequired,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
 };
