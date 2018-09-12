@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Page from '../hoc/page';
-
+import Logger from '../components/Logger';
 const HomePage = props => {
   return (
     <div className="ui three column grid">
@@ -85,6 +85,7 @@ const HomePage = props => {
             </div>
           </div>
         </div>
+        <Logger />
       </div>
     </div>
   );

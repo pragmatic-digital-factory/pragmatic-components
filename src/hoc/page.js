@@ -20,7 +20,7 @@ import Header from '../pages/Header';
 
 export default title => {
   return WrappedComponent => {
-    return ({ children, ...props }) => {
+    const WithTitle = ({ children, ...props }) => {
       return (
         <React.Fragment>
           <Header title={title} />
@@ -28,5 +28,6 @@ export default title => {
         </React.Fragment>
       );
     };
+    return WithTitle;
   };
 };

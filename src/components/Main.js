@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from '../pages/Home';
-import Form from '../pages/Form';
-
+import Form from '../pages/Form/Form';
+import FormProvider from '../pages/Form/FormProvider';
 export default class Main extends React.Component {
   render() {
     return (
