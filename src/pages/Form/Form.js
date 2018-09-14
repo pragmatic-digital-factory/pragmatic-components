@@ -1,11 +1,11 @@
-import React from 'react';
-import Page from '../../hoc/page';
-import FormInput from '../../components/Form/FormInput';
-import FormSelect from '../../components/Form/FormSelect';
-import CountryList from '../../enum/CountryList';
-import MonthList from '../../enum/MonthList';
-import { FormContext } from './FormProvider';
-import Logger from '../../components/Logger';
+import React from "react";
+import Page from "../../hoc/page";
+import FormInput from "../../components/Form/FormInput";
+import FormSelect from "../../components/Form/FormSelect";
+import CountryList from "../../enum/CountryList";
+import MonthList from "../../enum/MonthList";
+import { FormContext } from "./FormProvider";
+import Logger from "../../components/Logger";
 class FormPage extends React.Component {
   render() {
     return (
@@ -24,8 +24,8 @@ class FormPage extends React.Component {
                         type="text"
                         name="shipping[first-name]"
                         placeholder="First Name"
-                        value={context.state['shipping[first-name]']['value']}
-                        onChange={e => context.setFormField(e, 'shipping[first-name]')}
+                        value={context.state["shipping[first-name]"]["value"]}
+                        onChange={e => context.setFormField(e, "shipping[first-name]")}
                       />
                     </div>
                     <div className="field">
@@ -33,8 +33,8 @@ class FormPage extends React.Component {
                         type="text"
                         name="shipping[last-name]"
                         placeholder="Last Name"
-                        value={context.state['shipping[last-name]']['value']}
-                        onChange={e => context.setFormField(e, 'shipping[last-name]')}
+                        value={context.state["shipping[last-name]"]["value"]}
+                        onChange={e => context.setFormField(e, "shipping[last-name]")}
                       />
                     </div>
                   </div>
@@ -47,8 +47,8 @@ class FormPage extends React.Component {
                         type="text"
                         name="shipping[address]"
                         placeholder="Street Address"
-                        value={context.state['shipping[address]']['value']}
-                        onChange={e => context.setFormField(e, 'shipping[address]')}
+                        value={context.state["shipping[address]"]["value"]}
+                        onChange={e => context.setFormField(e, "shipping[address]")}
                       />
                     </div>
                     <div className="four wide field">
@@ -56,8 +56,8 @@ class FormPage extends React.Component {
                         type="text"
                         name="shipping[address-2]"
                         placeholder="Apt #"
-                        value={context.state['shipping[address-2]']['value']}
-                        onChange={e => context.setFormField(e, 'shipping[address-2]')}
+                        value={context.state["shipping[address-2]"]["value"]}
+                        onChange={e => context.setFormField(e, "shipping[address-2]")}
                       />
                     </div>
                   </div>
@@ -65,10 +65,10 @@ class FormPage extends React.Component {
                 <div className="fields">
                   <div className="twelve wide field">
                     <FormSelect
-                      name={'shipping[country]'}
+                      name={"shipping[country]"}
                       options={CountryList}
-                      value={context.state['shipping[country]']['value']}
-                      onChange={e => context.setFormField(e, 'shipping[country]')}
+                      value={context.state["shipping[country]"]["value"]}
+                      onChange={e => context.setFormField(e, "shipping[country]")}
                     />
                   </div>
                 </div>
@@ -97,8 +97,8 @@ class FormPage extends React.Component {
   }
 }
 
-export default Page('Some form samples')(FormPage);
+export default Page("Some form samples")(FormPage);
 
 const ShippingFormTemplate = {
-  'first-name': { value: '', errors: [], touched: false },
+  "first-name": { value: "", errors: [], touched: false },
 };

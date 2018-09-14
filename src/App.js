@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Main from './components/Main';
-import './App.css';
-import FormProvider from './pages/Form/FormProvider';
+import React, { Component } from "react";
+import Main from "./components/Main";
+import "./App.css";
+import FormProvider from "./pages/Form/FormProvider";
 class App extends Component {
   render() {
     return (

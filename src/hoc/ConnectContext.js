@@ -1,5 +1,5 @@
-import React from 'react';
-import { FormContext } from '../pages/Form/FormProvider';
+import React from "react";
+import { FormContext } from "../pages/Form/FormProvider";
 
 export const ConnectContext = WrappedComponent => {
   const WithContext = props => {

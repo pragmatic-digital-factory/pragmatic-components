@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-export const FormContext = React.createContext('blob');
+export const FormContext = React.createContext();
 
 class FormProvider extends Component {
   constructor(props) {
     super();
     this.state = {
-      'shipping[first-name]': {
-        value: '',
+      "shipping[first-name]": {
+        value: "",
         errors: [],
       },
-      'shipping[last-name]': {
-        value: '',
+      "shipping[last-name]": {
+        value: "",
         errors: [],
       },
-      'shipping[address]': {
-        value: '',
+      "shipping[address]": {
+        value: "",
         errors: [],
       },
-      'shipping[address-2]': {
-        value: '',
+      "shipping[address-2]": {
+        value: "",
         errors: [],
       },
-      'shipping[country]': {
-        value: '',
+      "shipping[country]": {
+        value: "",
         errors: [],
       },
     };

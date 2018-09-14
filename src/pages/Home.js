@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Page from '../hoc/page';
-import Logger from '../components/Logger';
+import React from "react";
+import { Link } from "react-router-dom";
+import Page from "../hoc/page";
+import Logger from "../components/Logger";
 const HomePage = props => {
   return (
     <div className="ui three column grid">
@@ -50,7 +50,9 @@ const HomePage = props => {
                       également possible de surcharger par un dessin une image ainsi que d'appliquer des filtres. Ce
                       composant focntionne également en mobile.
                     </p>
-                    <button className="ui primary button">Découvrir</button>
+                    <Link to={`/draw`}>
+                      <button className="ui primary button">Découvrir</button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -59,7 +61,7 @@ const HomePage = props => {
         </div>
         <div className="column">
           <div className="ui segment">
-            {' '}
+            {" "}
             <div className="ui items">
               <div className="ui items">
                 <div className="item">
@@ -91,4 +93,4 @@ const HomePage = props => {
   );
 };
 
-export default Page('Draft demo in a real context v/s Storybook')(HomePage);
+export default Page("Draft demo in a real context v/s Storybook")(HomePage);

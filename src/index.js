@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { IntlProvider } from 'react-intl';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { IntlProvider } from "react-intl";
+import "./index.css";
 
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
 
 ReactDOM.render(
   <IntlProvider locale="en">
@@ -13,6 +13,6 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </IntlProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 registerServiceWorker();
