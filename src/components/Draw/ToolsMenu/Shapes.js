@@ -6,13 +6,16 @@ class Shapes extends React.Component {
   static propType = {
     isMobile: PropTypes.boolean,
     setType: PropTypes.func,
+    undo: PropTypes.func,
   };
 
   renderShapesBar = () => {
-    const { setType } = this.props;
+    const { setType, undo } = this.props;
     return (
       <div className="actionBar">
-        <button type="button">Undo</button>
+        <button type="button" onClick={() => undo()}>
+          Undo
+        </button>
         <button type="button" onClick={() => setType(DrawElements.ARROW)}>
           Arrow
         </button>

@@ -7,12 +7,8 @@ import FreeDrawing from "./draw-elements/Free";
 import TextDrawing from "./draw-elements/Text";
 import { DrawElements } from "../../constants";
 
-export const getElementComponent = (
-  element,
-  index,
-  dragEvents = { handleDragStart: noop, handleDragEnd: noop },
-  type
-) => {
+export const getElementComponent = (element, index, dragEvents, type) => {
+  console.log("dragEvents", dragEvents);
   switch (element.type) {
     case DrawElements.RECTANGLE:
       return (

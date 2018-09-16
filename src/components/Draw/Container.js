@@ -87,28 +87,17 @@ export class DrawContainer extends React.Component {
     }
   }
 
-  setDraggedElement(draggedElementIndex, endX, endY) {
-    // if (draggedElementIndex !== -1) {
-    //   const {
-    //      elements,
-    //     offset,
-    //   } = this.state;
-    //   let el = elements[draggedElementIndex];
-    //   const offsetX = offset.startX - endX;
-    //   const offsetY = offset.startY - endY;
-    //   el = { ...el, startX: el.startX - offsetX, startY: el.startY - offsetY };
-    //   els[draggedElementIndex] = el;
-    //   this.setState(state => {
-    //     return { ...state, elements: els, offset: null };
-    //   });
-    // }
-  }
-
-  setElements(currentElement) {
+  setElements(currentElement, textBox) {
     const { isDrawing, type } = this.state;
-    if (isDrawing && type !== DrawElements.TEXT_AREA) {
+    if ((isDrawing && type !== DrawElements.TEXT_AREA) || (isDrawing && textBox)) {
       this.setState(state => {
-        return { ...state, type: null, elements: [...state.elements, currentElement], isDrawing: false };
+        return {
+          ...state,
+          type: null,
+          elements: [...state.elements, currentElement],
+          isDrawing: false,
+          currentElement: {},
+        };
       });
     }
   }
@@ -123,12 +112,6 @@ export class DrawContainer extends React.Component {
   }
 
   setTextBox(text) {
-    this.setState(state => {
-      return {
-        ...state,
-        type: null,
-      };
-    });
     const { currentElement, fontSize } = this.state;
     const textBoxElement = {
       ...currentElement,
@@ -138,7 +121,7 @@ export class DrawContainer extends React.Component {
       text,
       fontSize: fontSize,
     };
-    this.setElements(textBoxElement);
+    this.setElements(textBoxElement, true);
   }
 
   setFontSize(fontSize) {
@@ -149,8 +132,25 @@ export class DrawContainer extends React.Component {
 
   setCloseTextArea() {
     this.setState(state => {
-      return { ...state, typ: null, isDrawing: false, currentElement: {} };
+      return { ...state, type: null, isDrawing: false, currentElement: {} };
     });
+  }
+
+  setDraggedElement(draggedElementIndex, endX, endY) {
+    if (draggedElementIndex !== -1) {
+      const { elements, offset } = this.state;
+      let el = elements[draggedElementIndex];
+      const offsetX = offset.startX - endX;
+      const offsetY = offset.startY - endY;
+      el = { ...el, startX: el.startX - offsetX, startY: el.startY - offsetY };
+      this.setState(state => {
+        return {
+          ...state,
+          elements: Object.assign([...state.elements], { [draggedElementIndex]: el }),
+          offset: null,
+        };
+      });
+    }
   }
 
   setInitDrawZone(rect) {
@@ -172,6 +172,19 @@ export class DrawContainer extends React.Component {
     //this.type = this.type === type ? null : type;
   }
 
+  undo() {
+    if (!!this.state.elements.length) {
+      this.setState(state => {
+        const els = [...state.elements];
+        els.splice(-1);
+        return {
+          ...state,
+          elements: els,
+        };
+      });
+    }
+  }
+
   setStrokeWidth(strokeWidth) {
     this.setState(state => {
       return { ...state, strokeWidth };
@@ -191,12 +204,10 @@ export class DrawContainer extends React.Component {
   };
 
   handleMouseDown = e => {
-    console.log("bingo");
     if (!this.state.isDrawing) this.initCurrentElement(e.evt.offsetX, e.evt.offsetY);
   };
 
   handleMouseMove = e => {
-    console.log("on y passe");
     this.setCurrentElement(e.evt.offsetX, e.evt.offsetY);
   };
 
@@ -205,10 +216,12 @@ export class DrawContainer extends React.Component {
   };
 
   handleDragStart(e) {
+    console.log("on y passe bingo >>>");
     this.setOffset({ startX: e.evt.offsetX, startY: e.evt.offsetY });
   }
 
   handleDragEnd(e) {
+    console.log("on y passe binga >>>");
     const draggedElementIndex = findIndex(propEq("id", e.target.attrs.id))(this.state.elements);
     this.setDraggedElement(draggedElementIndex, e.evt.offsetX, e.evt.offsetY);
   }
@@ -218,7 +231,7 @@ export class DrawContainer extends React.Component {
     console.log("my State >>>", this.state);
     return (
       <React.Fragment>
-        <Shapes ismobile={isMobile} setType={this.setType.bind(this)} />
+        <Shapes ismobile={isMobile} setType={this.setType.bind(this)} undo={this.undo.bind(this)} />
         <div className={"sub-menu"}>
           <ColorPicker setColor={this.setColor.bind(this)} />
           <StrokeWidth strokeWidth={strokeWidth} setStrokeWidth={this.setStrokeWidth.bind(this)} />
@@ -247,11 +260,21 @@ export class DrawContainer extends React.Component {
           {isDrawing && (
             <CurrentElement
               currentElement={currentElement}
-              dragEvents={{ handleDragStart: this.handleDragStart, handleDragEnd: this.handleDragEnd }}
+              dragEvents={{
+                handleDragStart: this.handleDragStart.bind(this),
+                handleDragEnd: this.handleDragEnd.bind(this),
+              }}
               type={type}
             />
           )}
-          <Elements elements={elements} />
+          <Elements
+            elements={elements}
+            dragEvents={{
+              handleDragStart: this.handleDragStart.bind(this),
+              handleDragEnd: this.handleDragEnd.bind(this),
+            }}
+            type={type}
+          />
         </CanvasZone>
       </React.Fragment>
     );

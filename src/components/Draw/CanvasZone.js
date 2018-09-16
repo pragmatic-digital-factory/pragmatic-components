@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Layer, Stage } from "react-konva";
 import { DrawElements } from "../../constants";
 import CanvasTextArea from "./draw-elements/CanvasTextArea";
+import classNames from "classnames";
 import { encodedImage } from "./utils";
 // import ImageBackground from './ImageBackground'
 
@@ -54,7 +55,7 @@ export default class CanvasZone extends React.Component {
   // }
   //
   // renderElements() {
-  //   return toJS(DrawView.elements).map((element, index) => {
+  //   return toJS(Draw.splice(-1)View.elements).map((element, index) => {
   //     return this.getElementComponent(element, index);
   //   });
   // }
@@ -98,7 +99,7 @@ export default class CanvasZone extends React.Component {
         //   "photo-edit": DrawView.photoEdit,
         //   "text-edit": DrawView.type === DrawElements.TEXT_AREA,
         // })}
-        className={"canvas-zone"}
+        className={classNames("canvas-zone", { crosshair: isDrawing, grab: !isDrawing })}
         ref={"canvasZone"}
       >
         {type === DrawElements.TEXT_AREA &&
@@ -115,8 +116,6 @@ export default class CanvasZone extends React.Component {
         <Stage {...stageProps} width={drawZone ? drawZone.width : 1000} height={drawZone ? drawZone.height - 25 : 0}>
           <Layer>
             {/*{DrawView.photoEdit && this.renderBackground()}*/}
-            {/*{DrawView.isDrawing && this.renderCurrentElement()}*/}
-            {/*{this.renderElements()}*/}
             {this.props.children}
           </Layer>
         </Stage>

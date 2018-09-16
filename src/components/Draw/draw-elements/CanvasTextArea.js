@@ -26,13 +26,13 @@ class CanvasTextArea extends React.Component {
   };
 
   render() {
-    const { t, currentElement, drawZone, fontSize, setFontSize } = this.props;
+    const { currentElement, drawZone, fontSize, setFontSize } = this.props;
     const { textAreaValue } = this.state;
     return (
       <div
         style={{
           width: 220,
-          height: 100,
+          height: 150,
           position: "absolute",
           overflow: "hidden",
           top: currentElement.startY > drawZone.height - 110 ? drawZone.height - 110 : currentElement.startY,
@@ -45,7 +45,7 @@ class CanvasTextArea extends React.Component {
         <textarea
           style={{
             width: 210,
-            height: 50,
+            height: 80,
             maxHeight: 150,
             fontSize: fontSize - 1,
             resize: "none",
@@ -57,18 +57,15 @@ class CanvasTextArea extends React.Component {
             this.textareaBox = textarea;
           }}
         />
-        <div
-          className="btn-group d-flex justify-content-between"
-          style={{ background: "#FFFFFF", padding: "5px", width: 210, zIndex: 395 }}
-        >
-          <div className="btn-group btn-group-sm font-size">
+        <div style={{ background: "#FFFFFF", padding: "5px", width: 210, zIndex: 395 }}>
+          <div>
             <button
               className={classNames("btn btn-outline-secondary font-size-small", {
                 active: fontSize === 14,
               })}
               onClick={() => setFontSize(14)}
             >
-              <i className="fa fa-font" />
+              normal
             </button>
             <button
               className={classNames("btn btn-outline-secondary font-size-medium", {
@@ -76,7 +73,7 @@ class CanvasTextArea extends React.Component {
               })}
               onClick={() => setFontSize(18)}
             >
-              <i className="fa fa-font" />
+              Big
             </button>
             <button
               className={classNames("btn btn-outline-secondary font-size-large", {
@@ -84,12 +81,12 @@ class CanvasTextArea extends React.Component {
               })}
               onClick={() => setFontSize(22)}
             >
-              <i className="fa fa-font" />
+              Huge
             </button>
           </div>
           <div className="btn-group">
             <button className="btn btn btn-secondary btn-sm mr-1" onClick={() => this.handleCancel()}>
-              <i className="fa fa-times" />
+              cancel
             </button>
             <button className="btn btn-primary btn-sm" onClick={() => this.handleConfirm()}>
               validate
