@@ -1,5 +1,5 @@
-import React from 'react';
-import { Circle } from 'react-konva';
+import React from "react";
+import { Circle } from "react-konva";
 
 export default ({
   x,

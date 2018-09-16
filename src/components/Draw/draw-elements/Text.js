@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Text } from 'react-konva';
+import React, { Component } from "react";
+import { Text } from "react-konva";
 
 class TextDrawing extends Component {
   render() {
