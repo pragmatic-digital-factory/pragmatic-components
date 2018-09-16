@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import noop from '../../utils/noop';
-import Label from './Label';
-import FormErrors from './FormErrors';
+import React from "react";
+import PropTypes from "prop-types";
+import noop from "../../utils/noop";
+import Label from "./Label";
+import FormErrors from "./FormErrors";
 
 export default class FormSelect extends React.Component {
   renderPlaceholder() {
@@ -67,7 +67,7 @@ export default class FormSelect extends React.Component {
           onChange={onChange}
           onFocus={onFocus}
           required={required}
-          value={value || ''}
+          value={value || ""}
         >
           {placeholder && !options && this.renderPlaceholder()}
           {options && this.renderGroups(options)}
@@ -79,7 +79,7 @@ export default class FormSelect extends React.Component {
 }
 
 FormSelect.defaultProps = {
-  name: 'selectName',
+  name: "selectName",
   onChange: noop,
 };
 

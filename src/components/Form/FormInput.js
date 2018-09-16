@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import noop from '../../utils/noop';
-import Label from './Label';
-import FormErrors from './FormErrors';
+import React from "react";
+import PropTypes from "prop-types";
+import noop from "../../utils/noop";
+import Label from "./Label";
+import FormErrors from "./FormErrors";
 
 export default class FormInput extends React.Component {
   render() {
@@ -35,7 +35,7 @@ export default class FormInput extends React.Component {
     return (
       <div className={className}>
         {!/checkbox/.test(type) && !/radio/.test(type) && label && <Label>{label}</Label>}
-        {React.createElement('input', {
+        {React.createElement("input", {
           autoComplete,
           disabled,
           minLength,
@@ -62,8 +62,8 @@ export default class FormInput extends React.Component {
 }
 
 FormInput.defaultProps = {
-  name: 'inputName',
-  type: 'text',
+  name: "inputName",
+  type: "text",
   onChange: noop,
 };
 
@@ -84,5 +84,5 @@ FormInput.propTypes = {
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
   step: PropTypes.string,
-  type: PropTypes.oneOf(['checkbox', 'email', 'hidden', 'number', 'tel', 'text', 'radio', 'range']),
+  type: PropTypes.oneOf(["checkbox", "email", "hidden", "number", "tel", "text", "radio", "range"]),
 };

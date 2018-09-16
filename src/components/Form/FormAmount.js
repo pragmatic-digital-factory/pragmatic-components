@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Label from './Label';
-import FormErrors from './FormErrors';
-import numeral from 'numeral';
+import React from "react";
+import PropTypes from "prop-types";
+import Label from "./Label";
+import FormErrors from "./FormErrors";
+import numeral from "numeral";
 
 export default class FormAmount extends React.Component {
   constructor(props) {
@@ -58,15 +58,15 @@ export default class FormAmount extends React.Component {
   };
 
   format = value => {
-    if (value === '') return '';
+    if (value === "") return "";
     const number = parseFloat(value);
     if (this.props.amountFormat) return numeral(number).format(this.props.amountFormat);
-    return numeral(number).format(number >= 20 ? '0,0' : '0,0.00');
+    return numeral(number).format(number >= 20 ? "0,0" : "0,0.00");
   };
 
   parse = string => {
     const value = numeral(string).value();
-    return value !== null ? value.toString() : '';
+    return value !== null ? value.toString() : "";
   };
 
   render() {
@@ -88,7 +88,7 @@ export default class FormAmount extends React.Component {
     return (
       <div className={className}>
         {label && <Label>{label}</Label>}
-        {React.createElement('input', {
+        {React.createElement("input", {
           autoComplete,
           disabled,
           minLength,
@@ -111,8 +111,8 @@ export default class FormAmount extends React.Component {
 }
 
 FormAmount.defaultProps = {
-  name: 'amountName',
-  currency: '€',
+  name: "amountName",
+  currency: "€",
 };
 
 FormAmount.PropTypes = {
