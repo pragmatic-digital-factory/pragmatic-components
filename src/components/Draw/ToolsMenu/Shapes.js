@@ -12,49 +12,38 @@ class Shapes extends React.Component {
   renderShapesBar = () => {
     const { setType, undo } = this.props;
     return (
-      <div className="actionBar">
-        <button type="button" onClick={() => undo()}>
-          Undo
-        </button>
-        <button type="button" onClick={() => setType(DrawElements.ARROW)}>
-          Arrow
-        </button>
-        <button type="button" onClick={() => setType(DrawElements.LINE)}>
-          Line
-        </button>
-        <button type="button" onClick={() => setType(DrawElements.RECTANGLE)}>
-          Rectangle
-        </button>
-        <button type="button" onClick={() => setType(DrawElements.CIRCLE)}>
-          Circle
-        </button>
-        <button type="button" onClick={() => setType(DrawElements.FREE_DRAWING)}>
-          Free
-        </button>
-        <button type="button" className="btn btn-outline-primary" onClick={() => setType(DrawElements.TEXT_AREA)}>
-          Text
-        </button>
+      <div className="ui icon menu">
+        <a className="item" onClick={() => undo()}>
+          <i className="undo icon" />
+        </a>
+        <a className="item" onClick={() => setType(DrawElements.ARROW)}>
+          <i className="arrow right icon" />
+        </a>
+        <a className="item" onClick={() => setType(DrawElements.LINE)}>
+          <i className="minus icon" />
+        </a>
+        <a className="item" onClick={() => setType(DrawElements.CIRCLE)}>
+          <i className="circle outline icon" />
+        </a>
+        <a className="item" onClick={() => setType(DrawElements.RECTANGLE)}>
+          <i className="square outline icon" />
+        </a>
+        <a className="item" onClick={() => setType(DrawElements.FREE_DRAWING)}>
+          <i className="paint brush icon" />
+        </a>
+        <a className="item" onClick={() => setType(DrawElements.TEXT_AREA)}>
+          <i className="font icon" />
+        </a>
+        <a className="item" onClick={() => setType(DrawElements.IMAGE)}>
+          <i className="image outline icon" />
+        </a>
       </div>
     );
   };
 
   render() {
     const { isMobile } = this.props;
-    return isMobile ? (
-      <nav className="navbar fixed-bottom navbar-light bg-light">
-        <a className="navbar-brand" href="#">
-          Fixed bottom
-        </a>
-        <a className="navbar-brand" href="#">
-          Fixed bottom
-        </a>
-        <a className="navbar-brand" href="#">
-          Fixed bottom
-        </a>
-      </nav>
-    ) : (
-      this.renderShapesBar()
-    );
+    return isMobile ? <div>need to be designed</div> : this.renderShapesBar();
   }
 }
 

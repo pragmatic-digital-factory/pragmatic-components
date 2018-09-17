@@ -8,4 +8,5 @@ export const DrawElements = Object.freeze({
   TEXT_BOX: "textBox",
   TEXT_AREA: "textArea",
   UNDO: "undo",
+  IMAGE: "image",
 });
