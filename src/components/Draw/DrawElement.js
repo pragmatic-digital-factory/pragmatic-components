@@ -46,7 +46,6 @@ export class DrawElement {
     return this._color;
   }
   get startX() {
-    console.log("on y passe");
     return this._startX;
   }
   get startY() {

@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Layer, Stage } from "react-konva";
 import { DrawElements } from "../../constants";
-import CanvasTextArea from "./draw-elements/CanvasTextArea";
+import CanvasTextArea from "./Draw-elements/CanvasTextArea";
 import classNames from "classnames";
-import { encodedImage } from "./utils";
+
 // import ImageBackground from './ImageBackground'
 
 export default class CanvasZone extends React.Component {

@@ -1,14 +1,13 @@
 import React from "react";
-import RectangleDrawing from "./draw-elements/Rectangle";
-import CircleDrawing from "./draw-elements/Circle";
-import ArrowDrawing from "./draw-elements/Arrow";
-import LineDrawing from "./draw-elements/Line";
-import FreeDrawing from "./draw-elements/Free";
-import TextDrawing from "./draw-elements/Text";
+import RectangleDrawing from "./Draw-elements/Rectangle";
+import CircleDrawing from "./Draw-elements/Circle";
+import ArrowDrawing from "./Draw-elements/Arrow";
+import LineDrawing from "./Draw-elements/Line";
+import FreeDrawing from "./Draw-elements/Free";
+import TextDrawing from "./Draw-elements/Text";
 import { DrawElements } from "../../constants";
 
 export const getElementComponent = (element, index, dragEvents, type) => {
-  console.log("dragEvents", dragEvents);
   switch (element.type) {
     case DrawElements.RECTANGLE:
       return (
@@ -133,4 +132,4 @@ export const encodedImage = url =>
         })
     );
 
-export default encodedImage;
+export const unique_id = token => `${Date.now()}-${token}`;

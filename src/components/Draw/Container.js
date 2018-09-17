@@ -9,6 +9,8 @@ import Background from "./Background";
 import Shapes from "./ToolsMenu/Shapes";
 import ColorPicker from "./ToolsMenu/ColorPicker";
 import StrokeWidth from "./ToolsMenu/StrokeWidth";
+import DropItem from "./Dropzone";
+import { encodedImage, unique_id } from "./utils";
 import "./styles.css";
 
 export class DrawContainer extends React.Component {
@@ -26,20 +28,27 @@ export class DrawContainer extends React.Component {
     strokeWidthOpen: false,
     schemaName: "",
     loading: false,
-    photoEdit: false,
-    imgBackgroundUrl: null,
     imgBackground: null,
     offset: null,
     fontSize: 14,
     isMobile: new MobileDetect(window.navigator.userAgent).mobile(),
   };
 
+  componentDidMount() {
+    document.addEventListener("dragenter", e => this.handleDragEnter(e), true);
+    document.addEventListener("dragleave", e => this.handleDragLeave(e), true);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("dragEnter", e => this.handleDragEnter(e), true);
+    document.removeEventListener("dragleave", e => this.handleDragLeave(e), true);
+  }
+
   initCurrentElement(startX, startY) {
     const { type, color, strokeWidth, fontSize } = this.state;
     if (type !== null) {
-      const unique_id = `${Date.now()}-${type}`;
       const currentElement = {
-        id: unique_id,
+        id: unique_id(type),
         type: type,
         color: color,
         startX,
@@ -54,6 +63,7 @@ export class DrawContainer extends React.Component {
         draggable: true,
         strokeWidth: strokeWidth,
         fontSize: fontSize,
+        dropzone: false,
       };
       this.setState(state => {
         return { ...state, currentElement, isDrawing: true };
@@ -61,6 +71,8 @@ export class DrawContainer extends React.Component {
     }
     // this.currentElement = this.elements[unique_id]
   }
+
+  resetDatas() {}
 
   setCurrentElement(currentX, currentY) {
     const { isDrawing, type, currentElement } = this.state;
@@ -185,6 +197,26 @@ export class DrawContainer extends React.Component {
     }
   }
 
+  setAcceptedFiles(acceptedFiles) {
+    if (!!acceptedFiles.length) {
+      const image = new window.Image();
+      encodedImage(acceptedFiles[0].preview).then(dataUrl => {
+        image.src = dataUrl;
+        image.onload = () => {
+          this.setState(state => {
+            return { ...state, imgBackground: image, dropzone: false };
+          });
+        };
+      });
+    }
+  }
+
+  setRejectedFiles(rejectedFiles) {
+    if (!!rejectedFiles.length) {
+      alert("rejectedfiles >>>", rejectedFiles);
+    }
+  }
+
   setStrokeWidth(strokeWidth) {
     this.setState(state => {
       return { ...state, strokeWidth };
@@ -216,19 +248,50 @@ export class DrawContainer extends React.Component {
   };
 
   handleDragStart(e) {
-    console.log("on y passe bingo >>>");
     this.setOffset({ startX: e.evt.offsetX, startY: e.evt.offsetY });
   }
 
   handleDragEnd(e) {
-    console.log("on y passe binga >>>");
     const draggedElementIndex = findIndex(propEq("id", e.target.attrs.id))(this.state.elements);
     this.setDraggedElement(draggedElementIndex, e.evt.offsetX, e.evt.offsetY);
   }
 
+  handleDragEnter = e => {
+    e.preventDefault();
+    this.setState(state => {
+      return { ...state, dropzone: true };
+    });
+  };
+
+  handleDragLeave = e => {
+    e.preventDefault();
+    const isFilesDragVoid = (width, height) => {
+      return (width < 10 || width > window.innerWidth - 10) && (height < 10 || height > window.innerHeight - 10);
+    };
+    if (isFilesDragVoid) {
+      this.setState(state => {
+        return {
+          ...state,
+          dropzone: false,
+        };
+      });
+    }
+  };
+
   render() {
-    const { currentElement, drawZone, elements, isDrawing, fontSize, isMobile, strokeWidth, type } = this.state;
-    console.log("my State >>>", this.state);
+    const {
+      currentElement,
+      drawZone,
+      dropzone,
+      elements,
+      isDrawing,
+      fontSize,
+      isMobile,
+      imgBackground,
+      strokeWidth,
+      type,
+    } = this.state;
+
     return (
       <React.Fragment>
         <Shapes ismobile={isMobile} setType={this.setType.bind(this)} undo={this.undo.bind(this)} />
@@ -236,46 +299,54 @@ export class DrawContainer extends React.Component {
           <ColorPicker setColor={this.setColor.bind(this)} />
           <StrokeWidth strokeWidth={strokeWidth} setStrokeWidth={this.setStrokeWidth.bind(this)} />
         </div>
-        <CanvasZone
-          drawZone={drawZone}
-          eventsHandler={{
-            handleTouchStart: this.handleTouchStart,
-            handleTouchMove: this.handleTouchMove,
-            handleTouchEnd: this.handleTouchEnd,
-            handleMouseDown: this.handleMouseDown,
-            handleMouseMove: this.handleMouseMove,
-            handleMouseUp: this.handleMouseUp,
-          }}
-          currentElement={currentElement}
-          type={type}
-          isDrawing={isDrawing}
-          isMobile={isMobile}
-          fontSize={fontSize}
-          setInitDrawZone={this.setInitDrawZone.bind(this)}
-          setTextBox={this.setTextBox.bind(this)}
-          setFontSize={this.setFontSize.bind(this)}
-          setCloseTextArea={this.setCloseTextArea.bind(this)}
-        >
-          {/*<Background />*/}
-          {isDrawing && (
-            <CurrentElement
-              currentElement={currentElement}
+
+        {dropzone ? (
+          <DropItem
+            setAcceptedFiles={this.setAcceptedFiles.bind(this)}
+            setRejectedFiles={this.setRejectedFiles.bind(this)}
+          />
+        ) : (
+          <CanvasZone
+            drawZone={drawZone}
+            eventsHandler={{
+              handleTouchStart: this.handleTouchStart,
+              handleTouchMove: this.handleTouchMove,
+              handleTouchEnd: this.handleTouchEnd,
+              handleMouseDown: this.handleMouseDown,
+              handleMouseMove: this.handleMouseMove,
+              handleMouseUp: this.handleMouseUp,
+            }}
+            currentElement={currentElement}
+            type={type}
+            isDrawing={isDrawing}
+            isMobile={isMobile}
+            fontSize={fontSize}
+            setInitDrawZone={this.setInitDrawZone.bind(this)}
+            setTextBox={this.setTextBox.bind(this)}
+            setFontSize={this.setFontSize.bind(this)}
+            setCloseTextArea={this.setCloseTextArea.bind(this)}
+          >
+            {imgBackground && <Background image={imgBackground} />}
+            {isDrawing && (
+              <CurrentElement
+                currentElement={currentElement}
+                dragEvents={{
+                  handleDragStart: this.handleDragStart.bind(this),
+                  handleDragEnd: this.handleDragEnd.bind(this),
+                }}
+                type={type}
+              />
+            )}
+            <Elements
+              elements={elements}
               dragEvents={{
                 handleDragStart: this.handleDragStart.bind(this),
                 handleDragEnd: this.handleDragEnd.bind(this),
               }}
               type={type}
             />
-          )}
-          <Elements
-            elements={elements}
-            dragEvents={{
-              handleDragStart: this.handleDragStart.bind(this),
-              handleDragEnd: this.handleDragEnd.bind(this),
-            }}
-            type={type}
-          />
-        </CanvasZone>
+          </CanvasZone>
+        )}
       </React.Fragment>
     );
   }
