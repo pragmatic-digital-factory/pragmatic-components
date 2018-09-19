@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Image } from "react-konva";
 
 class ImageBackground extends React.Component {
@@ -7,7 +8,7 @@ class ImageBackground extends React.Component {
   }
 
   render() {
-    const { image, width, height } = this.props;
+    const { image } = this.props;
     return (
       <Image
         image={image}
@@ -24,4 +25,8 @@ class ImageBackground extends React.Component {
     );
   }
 }
+
+ImageBackground.propTypes = {
+  image: PropTypes.object,
+};
 export default ImageBackground;

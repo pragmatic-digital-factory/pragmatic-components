@@ -7,10 +7,11 @@ class Shapes extends React.Component {
     isMobile: PropTypes.boolean,
     setType: PropTypes.func,
     undo: PropTypes.func,
+    setDropZon: PropTypes.func,
   };
 
   renderShapesBar = () => {
-    const { setType, undo } = this.props;
+    const { setType, undo, setDropZone } = this.props;
     return (
       <div className="ui icon menu">
         <a className="item" onClick={() => undo()}>
@@ -34,7 +35,7 @@ class Shapes extends React.Component {
         <a className="item" onClick={() => setType(DrawElements.TEXT_AREA)}>
           <i className="font icon" />
         </a>
-        <a className="item" onClick={() => setType(DrawElements.IMAGE)}>
+        <a className="item" onClick={() => setDropZone()}>
           <i className="image outline icon" />
         </a>
       </div>

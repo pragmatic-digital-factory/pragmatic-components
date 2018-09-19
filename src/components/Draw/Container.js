@@ -6,9 +6,7 @@ import CanvasZone from "./CanvasZone";
 import CurrentElement from "./CurrentElement";
 import Elements from "./Elements";
 import Background from "./Background";
-import Shapes from "./ToolsMenu/Shapes";
-import ColorPicker from "./ToolsMenu/ColorPicker";
-import StrokeWidth from "./ToolsMenu/StrokeWidth";
+import ToolsMenu from "./ToolsMenu";
 import DropItem from "./Dropzone";
 import { encodedImage, unique_id } from "./utils";
 import "./styles.css";
@@ -72,8 +70,6 @@ export class DrawContainer extends React.Component {
     // this.currentElement = this.elements[unique_id]
   }
 
-  resetDatas() {}
-
   setCurrentElement(currentX, currentY) {
     const { isDrawing, type, currentElement } = this.state;
     if (isDrawing && type !== DrawElements.TEXT_AREA) {
@@ -114,37 +110,15 @@ export class DrawContainer extends React.Component {
     }
   }
 
-  setOffset(offset) {
-    this.setState(state => {
-      return {
-        ...state,
-        offset,
-      };
-    });
-  }
-
-  setTextBox(text) {
-    const { currentElement, fontSize } = this.state;
-    const textBoxElement = {
-      ...currentElement,
-      type: DrawElements.TEXT_BOX,
-      startX: currentElement.startX,
-      startY: currentElement.startY,
-      text,
-      fontSize: fontSize,
-    };
-    this.setElements(textBoxElement, true);
-  }
-
-  setFontSize(fontSize) {
-    this.setState(state => {
-      return { ...state, fontSize };
-    });
-  }
-
   setCloseTextArea() {
     this.setState(state => {
       return { ...state, type: null, isDrawing: false, currentElement: {} };
+    });
+  }
+
+  setColor(color) {
+    this.setState(state => {
+      return { ...state, color };
     });
   }
 
@@ -165,16 +139,49 @@ export class DrawContainer extends React.Component {
     }
   }
 
+  setDropZone() {
+    this.setState(state => {
+      return { ...state, dropzone: !state.dropzone };
+    });
+  }
+
+  setFontSize(fontSize) {
+    this.setState(state => {
+      return { ...state, fontSize };
+    });
+  }
   setInitDrawZone(rect) {
     this.setState(state => {
       return { ...state, drawZone: rect };
     });
   }
 
-  setColor(color) {
+  setOffset(offset) {
     this.setState(state => {
-      return { ...state, color };
+      return {
+        ...state,
+        offset,
+      };
     });
+  }
+
+  setStrokeWidth(strokeWidth) {
+    this.setState(state => {
+      return { ...state, strokeWidth: parseInt(strokeWidth) };
+    });
+  }
+
+  setTextBox(text) {
+    const { currentElement, fontSize } = this.state;
+    const textBoxElement = {
+      ...currentElement,
+      type: DrawElements.TEXT_BOX,
+      startX: currentElement.startX,
+      startY: currentElement.startY,
+      text,
+      fontSize: fontSize,
+    };
+    this.setElements(textBoxElement, true);
   }
 
   setType(type) {
@@ -217,12 +224,6 @@ export class DrawContainer extends React.Component {
     }
   }
 
-  setStrokeWidth(strokeWidth) {
-    this.setState(state => {
-      return { ...state, strokeWidth };
-    });
-  }
-
   handleTouchStart = e => {
     this.initCurrentElement(e.currentTarget.pointerPos.x, e.currentTarget.pointerPos.y);
   };
@@ -258,9 +259,7 @@ export class DrawContainer extends React.Component {
 
   handleDragEnter = e => {
     e.preventDefault();
-    this.setState(state => {
-      return { ...state, dropzone: true };
-    });
+    this.setDropZone();
   };
 
   handleDragLeave = e => {
@@ -280,6 +279,7 @@ export class DrawContainer extends React.Component {
 
   render() {
     const {
+      color,
       currentElement,
       drawZone,
       dropzone,
@@ -294,12 +294,16 @@ export class DrawContainer extends React.Component {
 
     return (
       <React.Fragment>
-        <Shapes ismobile={isMobile} setType={this.setType.bind(this)} undo={this.undo.bind(this)} />
-        <div className={"sub-menu"}>
-          <ColorPicker setColor={this.setColor.bind(this)} />
-          <StrokeWidth strokeWidth={strokeWidth} setStrokeWidth={this.setStrokeWidth.bind(this)} />
-        </div>
-
+        <ToolsMenu
+          setColor={this.setColor.bind(this)}
+          color={color}
+          ismobile={isMobile}
+          setType={this.setType.bind(this)}
+          undo={this.undo.bind(this)}
+          setDropZone={this.setDropZone.bind(this)}
+          strokeWidth={strokeWidth}
+          setStrokeWidth={this.setStrokeWidth.bind(this)}
+        />
         {dropzone ? (
           <DropItem
             setAcceptedFiles={this.setAcceptedFiles.bind(this)}
@@ -327,6 +331,14 @@ export class DrawContainer extends React.Component {
             setCloseTextArea={this.setCloseTextArea.bind(this)}
           >
             {imgBackground && <Background image={imgBackground} />}
+            <Elements
+              elements={elements}
+              dragEvents={{
+                handleDragStart: this.handleDragStart.bind(this),
+                handleDragEnd: this.handleDragEnd.bind(this),
+              }}
+              type={type}
+            />
             {isDrawing && (
               <CurrentElement
                 currentElement={currentElement}
@@ -337,14 +349,6 @@ export class DrawContainer extends React.Component {
                 type={type}
               />
             )}
-            <Elements
-              elements={elements}
-              dragEvents={{
-                handleDragStart: this.handleDragStart.bind(this),
-                handleDragEnd: this.handleDragEnd.bind(this),
-              }}
-              type={type}
-            />
           </CanvasZone>
         )}
       </React.Fragment>

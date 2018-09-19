@@ -5,8 +5,6 @@ import { DrawElements } from "../../constants";
 import CanvasTextArea from "./Draw-elements/CanvasTextArea";
 import classNames from "classnames";
 
-// import ImageBackground from './ImageBackground'
-
 export default class CanvasZone extends React.Component {
   static propTypes = {
     eventsHandler: PropTypes.shape({
@@ -25,41 +23,7 @@ export default class CanvasZone extends React.Component {
   componentDidMount() {
     const { setInitDrawZone } = this.props;
     setInitDrawZone(this.refs.canvasZone.getBoundingClientRect());
-    // if (DrawView.photoEdit) {
-    //   const image = new window.Image();
-    //   encodedImage(DrawView.imgBackgroundUrl).then(dataUrl => {
-    //     image.src = dataUrl;
-    //     image.onload = () => {
-    //       if (image.width > image.height) {
-    //         const ratio = image.width / image.height;
-    //         image.width = DrawView.drawZone.width;
-    //         image.height = image.width / ratio;
-    //         DrawView.setInitDrawZone({ height: image.height, width: image.width });
-    //       } else if (image.height > image.width) {
-    //         const ratio = image.height / image.width;
-    //         image.height = DrawView.drawZone.height;
-    //         image.width = image.height / ratio;
-    //         DrawView.setInitDrawZone({ height: image.height, width: image.width });
-    //       }
-    //       DrawView.setImgBackground(image);
-    //     };
-    //   });
-    // }
   }
-
-  // renderBackground() {
-  //   if (DrawView.imgBackground) {
-  //     return <ImageBackground image={DrawView.imgBackground} width={DrawView.drawZone.width} />;
-  //   }
-  //   return null;
-  // }
-  //
-  // renderElements() {
-  //   return toJS(Draw.splice(-1)View.elements).map((element, index) => {
-  //     return this.getElementComponent(element, index);
-  //   });
-  // }
-  //
 
   render() {
     const {

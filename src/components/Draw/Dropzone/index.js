@@ -16,7 +16,12 @@ class DropItem extends React.Component {
           className="dropzone"
           accept={"image/jpeg,image/jpg,image/png,image/tiff,image/gif"}
         >
-          <p>Glisser ou cliquer un fichier de type image</p>
+          <div className={"info"}>
+            <p>
+              Drag and drop or Click here to add an image in the background<br />
+              <i className={"icon upload"} />
+            </p>
+          </div>
         </Dropzone>
       </div>
     );
