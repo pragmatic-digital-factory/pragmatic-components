@@ -5,6 +5,11 @@ import { ChromePicker } from "react-color";
 class ColorPicker extends React.Component {
   state = { displayColorPicker: false };
 
+  static propTypes = {
+    setColor: PropTypes.func,
+    color: PropTypes.string,
+  };
+
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker });
   };

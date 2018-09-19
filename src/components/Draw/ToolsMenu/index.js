@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Shapes from "./Shapes";
 import StrokeWidth from "./StrokeWidth";
 import ColorPicker from "./ColorPicker";
@@ -19,6 +20,18 @@ const ToolsMenu = ({ color, strokeWidth, setColor, setDropZone, setStrokeWidth, 
       </div>
     </React.Fragment>
   );
+};
+
+ToolsMenu.propTypes = {
+  color: PropTypes.string,
+  strokeWidth: PropTypes.number,
+  setColor: PropTypes.func,
+  setDropZone: PropTypes.func,
+  setStrokeWidth: PropTypes.func,
+  setType: PropTypes.func,
+  isMobile: PropTypes.bool,
+  type: PropTypes.string,
+  undo: PropTypes.func,
 };
 
 export default ToolsMenu;

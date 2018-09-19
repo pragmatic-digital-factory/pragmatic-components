@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import { Image } from "react-konva";
 
 class ImageBackground extends React.Component {
+  static propTypes = {
+    image: PropTypes.object,
+  };
+
   componentDidMount() {
     this.imgBackground.cache();
   }
@@ -16,7 +20,6 @@ class ImageBackground extends React.Component {
         y={0}
         width={image.width}
         height={image.height}
-        // onMouseOver={onMouseOver}
         ref={node => {
           this.imgBackground = node;
         }}
@@ -25,8 +28,4 @@ class ImageBackground extends React.Component {
     );
   }
 }
-
-ImageBackground.propTypes = {
-  image: PropTypes.object,
-};
 export default ImageBackground;

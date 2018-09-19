@@ -1,7 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
 
 class DropItem extends React.Component {
+  static propTypes = {
+    setAcceptedFiles: PropTypes.func,
+    setRejectedFiles: PropTypes.func,
+  };
+
   render() {
     const { setAcceptedFiles, setRejectedFiles } = this.props;
     return (

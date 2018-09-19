@@ -4,8 +4,8 @@ import classnames from "classnames";
 import { DrawElements } from "../../../constants";
 
 class Shapes extends React.Component {
-  static propType = {
-    isMobile: PropTypes.boolean,
+  static propTypes = {
+    isMobile: PropTypes.bool,
     setType: PropTypes.func,
     undo: PropTypes.func,
     setDropZone: PropTypes.func,
