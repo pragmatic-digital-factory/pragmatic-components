@@ -3,10 +3,10 @@ import Shapes from "./Shapes";
 import StrokeWidth from "./StrokeWidth";
 import ColorPicker from "./ColorPicker";
 
-const ToolsMenu = ({ color, strokeWidth, setColor, setDropZone, setStrokeWidth, setType, isMobile, undo }) => {
+const ToolsMenu = ({ color, strokeWidth, setColor, setDropZone, setStrokeWidth, setType, isMobile, type, undo }) => {
   return (
     <React.Fragment>
-      <Shapes ismobile={isMobile} setType={setType} undo={undo} setDropZone={setDropZone} />
+      <Shapes ismobile={isMobile} setType={setType} undo={undo} setDropZone={setDropZone} type={type} />
       <div className={"sub-menu"}>
         <ColorPicker setColor={setColor} color={color} />
         <div className={"color-set"} style={{ background: color }} />

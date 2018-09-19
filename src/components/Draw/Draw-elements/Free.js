@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Line } from "react-konva";
 
-export default ({
+const FreeDraw = ({
   startX,
   startY,
   cumulatedVector,
@@ -31,3 +32,19 @@ export default ({
     />
   );
 };
+
+FreeDraw.propTypes = {
+  x: PropTypes.number,
+  y: PropTypes.number,
+  points: PropTypes.array,
+  fill: PropTypes.string,
+  stroke: PropTypes.string,
+  strokeWidth: PropTypes.number,
+  name: PropTypes.string,
+  onDragEnd: PropTypes.func,
+  onDragStart: PropTypes.func,
+  draggable: PropTypes.bool,
+  id: PropTypes.string,
+};
+
+export default FreeDraw;

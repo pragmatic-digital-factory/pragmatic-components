@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Line } from "react-konva";
 
-export default props => {
+const LineDraw = props => {
   return (
     <Line
       {...props}
@@ -15,3 +16,15 @@ export default props => {
     />
   );
 };
+
+LineDraw.propTypes = {
+  points: PropTypes.array,
+  fill: PropTypes.string,
+  name: PropTypes.string,
+  onDragEnd: PropTypes.func,
+  onDragStart: PropTypes.func,
+  draggable: PropTypes.bool,
+  id: PropTypes.string,
+};
+
+export default LineDraw;

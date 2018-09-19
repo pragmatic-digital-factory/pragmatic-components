@@ -1,7 +1,26 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Text } from "react-konva";
 
-class TextDrawing extends Component {
+class TextDraw extends Component {
+  static propTypes = {
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    padding: PropTypes.number,
+    align: PropTypes.string,
+    text: PropTypes.string,
+    fill: PropTypes.string,
+    fontFamily: PropTypes.string,
+    draggable: PropTypes.bool,
+    name: PropTypes.string,
+    handleDragStart: PropTypes.func,
+    handleDragEnd: PropTypes.func,
+    id: PropTypes.string,
+    fontSize: PropTypes.number,
+  };
+
   render() {
     const {
       x,
@@ -17,7 +36,6 @@ class TextDrawing extends Component {
       name,
       handleDragStart,
       handleDragEnd,
-      onMouseOver,
       id,
       fontSize,
     } = this.props;
@@ -37,7 +55,6 @@ class TextDrawing extends Component {
         name={name}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
-        onMouseOver={onMouseOver}
         id={id}
         fontSize={fontSize}
       />
@@ -45,4 +62,4 @@ class TextDrawing extends Component {
   }
 }
 
-export default TextDrawing;
+export default TextDraw;

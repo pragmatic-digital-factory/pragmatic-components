@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
 class CanvasTextArea extends React.Component {
   constructor(props, context) {
@@ -8,6 +9,14 @@ class CanvasTextArea extends React.Component {
       textAreaValue: "",
     };
   }
+
+  static propTypes = {
+    currentElement: PropTypes.object,
+    drawZone: PropTypes.object,
+    fontSize: PropTypes.number,
+    setFontSize: PropTypes.func,
+    setTextBox: PropTypes.func,
+  };
 
   componentDidMount() {
     this.textareaBox.focus();
@@ -97,4 +106,5 @@ class CanvasTextArea extends React.Component {
     );
   }
 }
+
 export default CanvasTextArea;

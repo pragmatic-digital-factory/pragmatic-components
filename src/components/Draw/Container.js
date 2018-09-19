@@ -298,6 +298,7 @@ export class DrawContainer extends React.Component {
           setColor={this.setColor.bind(this)}
           color={color}
           ismobile={isMobile}
+          type={type}
           setType={this.setType.bind(this)}
           undo={this.undo.bind(this)}
           setDropZone={this.setDropZone.bind(this)}

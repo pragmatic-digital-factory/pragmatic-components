@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Rect } from "react-konva";
 
-export default props => {
+const RectangleDraw = props => {
   return (
     <Rect
       {...props}
@@ -13,3 +14,13 @@ export default props => {
     />
   );
 };
+
+RectangleDraw.propTypes = {
+  name: PropTypes.string,
+  onDragEnd: PropTypes.func,
+  onDragStart: PropTypes.func,
+  draggable: PropTypes.bool,
+  id: PropTypes.string,
+};
+
+export default RectangleDraw;

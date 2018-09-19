@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Circle } from "react-konva";
 
-export default ({
+const CircleDraw = ({
   x,
   y,
   width,
@@ -28,8 +29,23 @@ export default ({
       name={name}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      onMouseOver={onMouseOver}
       id={id}
     />
   );
 };
+
+CircleDraw.propTypes = {
+  draggable: PropTypes.bool,
+  name: PropTypes.string,
+  onDragStart: PropTypes.func,
+  onDragEnd: PropTypes.func,
+  id: PropTypes.string,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  stroke: PropTypes.string,
+  strokeWidth: PropTypes.number,
+};
+
+export default CircleDraw;

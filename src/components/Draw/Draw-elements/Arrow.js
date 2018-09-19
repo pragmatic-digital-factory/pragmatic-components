@@ -1,7 +1,7 @@
 import React from "react";
 import { Arrow } from "react-konva";
 import PropTypes from "prop-types";
-const ArrowElement = props => {
+const ArrowDraw = props => {
   return (
     <Arrow
       {...props}
@@ -17,7 +17,7 @@ const ArrowElement = props => {
   );
 };
 
-ArrowElement.propTypes = {
+ArrowDraw.propTypes = {
   points: PropTypes.array,
   fill: PropTypes.number,
   pointerLength: PropTypes.number,
@@ -28,4 +28,4 @@ ArrowElement.propTypes = {
   id: PropTypes.string,
 };
 
-export default ArrowElement;
+export default ArrowDraw;

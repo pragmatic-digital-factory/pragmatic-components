@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 import { DrawElements } from "../../../constants";
 
 class Shapes extends React.Component {
@@ -7,32 +8,51 @@ class Shapes extends React.Component {
     isMobile: PropTypes.boolean,
     setType: PropTypes.func,
     undo: PropTypes.func,
-    setDropZon: PropTypes.func,
+    setDropZone: PropTypes.func,
+    type: PropTypes.string,
   };
 
   renderShapesBar = () => {
-    const { setType, undo, setDropZone } = this.props;
+    const { setType, undo, setDropZone, type } = this.props;
     return (
       <div className="ui icon menu">
-        <a className="item" onClick={() => undo()}>
+        <a className={"item"} onClick={() => undo()}>
           <i className="undo icon" />
         </a>
-        <a className="item" onClick={() => setType(DrawElements.ARROW)}>
+        <a
+          className={classnames("item", { active: type === DrawElements.ARROW })}
+          onClick={() => setType(DrawElements.ARROW)}
+        >
           <i className="arrow right icon" />
         </a>
-        <a className="item" onClick={() => setType(DrawElements.LINE)}>
+        <a
+          className={classnames("item", { active: type === DrawElements.LINE })}
+          onClick={() => setType(DrawElements.LINE)}
+        >
           <i className="minus icon" />
         </a>
-        <a className="item" onClick={() => setType(DrawElements.CIRCLE)}>
+        <a
+          className={classnames("item", { active: type === DrawElements.CIRCLE })}
+          onClick={() => setType(DrawElements.CIRCLE)}
+        >
           <i className="circle outline icon" />
         </a>
-        <a className="item" onClick={() => setType(DrawElements.RECTANGLE)}>
+        <a
+          className={classnames("item", { active: type === DrawElements.RECTANGLE })}
+          onClick={() => setType(DrawElements.RECTANGLE)}
+        >
           <i className="square outline icon" />
         </a>
-        <a className="item" onClick={() => setType(DrawElements.FREE_DRAWING)}>
+        <a
+          className={classnames("item", { active: type === DrawElements.FREE_DRAWING })}
+          onClick={() => setType(DrawElements.FREE_DRAWING)}
+        >
           <i className="paint brush icon" />
         </a>
-        <a className="item" onClick={() => setType(DrawElements.TEXT_AREA)}>
+        <a
+          className={classnames("item", { active: type === DrawElements.TEXT_AREA })}
+          onClick={() => setType(DrawElements.TEXT_AREA)}
+        >
           <i className="font icon" />
         </a>
         <a className="item" onClick={() => setDropZone()}>
