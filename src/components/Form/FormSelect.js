@@ -45,7 +45,7 @@ export default class FormSelect extends React.Component {
   }
 
   renderGroups(groups) {
-    let result = [];
+    const result = [];
     result.push(this.renderPlaceholder());
 
     groups &&
