@@ -25,7 +25,7 @@ export default class FormSelect extends React.Component {
   }
 
   renderGroups(groups) {
-    let result = [];
+    const result = [];
     result.push(this.renderPlaceholder());
     Object.keys(groups[0]).length > 2
       ? groups.forEach(({ label, options, disabled }) =>
