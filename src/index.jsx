@@ -10,6 +10,6 @@ ReactDOM.render(
   <IntlProvider locale="en">
     <App />
   </IntlProvider>,
-  document.getElementById('root')
+  document.getElementById('root') // eslint-disable-line no-undef
 );
 registerServiceWorker();
