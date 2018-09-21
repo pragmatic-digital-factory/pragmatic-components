@@ -1,11 +1,11 @@
 export default (intl, id, values) => {
-  const formatMessage = (messageId, values) =>
+  const formatMessage = (messageId, messageValues) =>
     intl.formatMessage(
       {
         id: messageId,
         defaultMessage: 'Translation not found',
       },
-      values
+      messageValues
     );
   return id ? formatMessage(id, values) : id;
 };
