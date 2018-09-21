@@ -13,12 +13,6 @@
   "proseWrap": "preserve",
   "overrides": [
     {
-      "files": "src/**/*.{less,css}",
-      "options": {
-        "parser": "postcss"
-      }
-    },
-    {
       "files": [".prettierrc", ".eslintrc", ".nvmrc"],
       "options": {
         "parser": "json"
